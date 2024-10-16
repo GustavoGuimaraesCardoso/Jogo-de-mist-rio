@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Jogo de Mistério</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Jogo de Mistério</h1>
+        <p id="story">Você acorda em uma sala escura. O som de passos ecoa no corredor. Há duas portas à sua frente.</p>
+        <div id="choices">
+            <button onclick="choose('door1')">Abrir a porta à esquerda</button>
+            <button onclick="choose('door2')">Abrir a porta à direita</button>
+        </div>
+    </div>
+
+    <script>
+        let storyElement = document.getElementById('story');
+        let choicesElement = document.getElementById('choices');
+
+        function choose(option) {
+            if (option === 'door1') {
+                storyElement.innerHTML = "Você entrou em uma sala iluminada. Há uma escada que leva para o sótão e uma janela aberta.";
+                choicesElement.innerHTML = `
+                    <button onclick="choose('attic')">Subir para o sótão</button>
+                    <button onclick="choose('window')">Sair pela janela</button>
+                `;
+            } else if (option === 'door2') {
+                storyElement.innerHTML = "Você entrou em um corredor sombrio. Há uma escada que desce para o porão e uma porta no final do corredor.";
+                choicesElement.innerHTML = `
+                    <button onclick="choose('basement')">Descer para o porão</button>
+                    <button onclick="choose('endOfHallway')">Seguir até a porta no fim do corredor</button>
+                `;
+            } else if (option === 'attic') {
+                storyElement.innerHTML = "No sótão, você encontra uma caixa misteriosa e uma passagem secreta.";
+                choicesElement.innerHTML = `
+                    <button onclick="choose('box')">Abrir a caixa</button>
+                    <button onclick="choose('secretPassage')">Entrar na passagem secreta</button>
+                `;
+            } else if (option === 'window') {
+                storyElement.innerHTML = "Você pula pela janela e foge, mas logo se perde na floresta densa. Seu destino é incerto.";
+                choicesElement.innerHTML = `
+                    <p><strong>Final Incerto: Você se perde na floresta.</strong></p>
+                    <button onclick="restart()">Recomeçar</button>
+                `;
+            } else if (option === 'basement') {
+                storyElement.innerHTML = "Você desce para o porão e encontra uma porta trancada e uma escada que parece levar ainda mais para baixo.";
+                choicesElement.innerHTML = `
+                    <button onclick="choose('lockedDoor')">Tentar abrir a porta trancada</button>
+                    <button onclick="choose('deeperStairs')">Descer ainda mais</button>
+                `;
+            } else if (option === 'endOfHallway') {
+                storyElement.innerHTML = "Você abre a porta e encontra uma sala cheia de estranhos artefatos. Um deles emite um brilho fraco.";
+                choicesElement.innerHTML = `
+                    <button onclick="choose('touchArtifact')">Tocar o artefato brilhante</button>
+                    <button onclick="choose('leaveRoom')">Sair da sala</button>
+                `;
+            } else if (option === 'box') {
+                storyElement.innerHTML = "Dentro da caixa, você encontra um antigo diário. Ao lê-lo, você descobre um terrível segredo sobre a casa.";
+                choicesElement.innerHTML = `
+                    <p><strong>Final Revelação: O segredo da casa é revelado e você foge em pânico.</strong></p>
+                    <button onclick="restart()">Recomeçar</button>
+                `;
+            } else if (option === 'secretPassage') {
+                storyElement.innerHTML = "A passagem leva para fora da casa. Você se sente aliviado e decide seguir em frente.";
+                choicesElement.innerHTML = `
+                    <p><strong>Final Feliz: Você escapa em segurança!</strong></p>
+                    <button onclick="restart()">Recomeçar</button>
+                `;
+            } else if (option === 'lockedDoor') {
+                storyElement.innerHTML = "A porta está fortemente trancada. Enquanto tenta abri-la, você ouve passos atrás de você.";
+                choicesElement.innerHTML = `
+                    <button onclick="choose('hide')">Se esconder</button>
+                    <button onclick="choose('confront')">Enfrentar o que está vindo</button>
+                `;
+            } else if (option === 'deeperStairs') {
+                storyElement.innerHTML = "Você desce mais e mais, até que tudo fica escuro. Você ouve um som estranho ao longe.";
+                choicesElement.innerHTML = `
+                    <p><strong>Final Trágico: Você nunca mais é visto.</strong></p>
+                    <button onclick="restart()">Recomeçar</button>
+                `;
+            } else if (option === 'touchArtifact') {
+                storyElement.innerHTML = "Ao tocar o artefato, você é transportado para outra dimensão. Tudo à sua volta parece surreal.";
+                choicesElement.innerHTML = `
+                    <p><strong>Final Surreal: Você fica preso em uma dimensão desconhecida.</strong></p>
+                    <button onclick="restart()">Recomeçar</button>
+                `;
+            } else if (option === 'leaveRoom') {
+                storyElement.innerHTML = "Você decide não mexer em nada e sai da sala. Você encontra uma saída e foge da casa.";
+                choicesElement.innerHTML = `
+                    <p><strong>Final Seguro: Você sai da casa em segurança.</strong></p>
+                    <button onclick="restart()">Recomeçar</button>
+                `;
+            } else if (option === 'hide') {
+                storyElement.innerHTML = "Você se esconde atrás de uma pilha de caixas. Algo ou alguém passa lentamente por você, mas não te encontra.";
+                choicesElement.innerHTML = `
+                    <p><strong>Final Escondido: Você consegue se esconder com sucesso e escapar depois.</strong></p>
+                    <button onclick="restart()">Recomeçar</button>
+                `;
+            } else if (option === 'confront') {
+                storyElement.innerHTML = "Você decide enfrentar o que está vindo, mas se depara com algo que não consegue descrever. Não há mais escapatória.";
+                choicesElement.innerHTML = `
+                    <p><strong>Final Enfrentamento: Você foi corajoso, mas não sobreviveu.</strong></p>
+                    <button onclick="restart()">Recomeçar</button>
+                `;
+            }
+        }
+
+        function restart() {
+            storyElement.innerHTML = "Você acorda em uma sala escura. O som de passos ecoa no corredor. Há duas portas à sua frente.";
+            choicesElement.innerHTML = `
+                <button onclick="choose('door1')">Abrir a porta à esquerda</button>
+                <button onclick="choose('door2')">Abrir a porta à direita</button>
+            `;
+        }
+    </script>
+</body>
+</html>
